@@ -17,13 +17,14 @@ import java.util.List;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Value("")
+    @Value("${jwt.secret}")
     private String secret;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    private static final List<String> EXCLUDE_URL = Arrays.asList("/jwt-rest-template/auth/refresh-token");
+    private static final List<String> EXCLUDE_URL = Arrays.asList("/jwt-rest-template/auth/refresh-token"
+            ,"/jwt-rest-template/auth/get-token");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

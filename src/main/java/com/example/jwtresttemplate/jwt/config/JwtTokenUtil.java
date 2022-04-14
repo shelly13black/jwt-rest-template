@@ -18,14 +18,14 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
-@PropertySource("class:application.properties")
+@PropertySource("classpath:application.properties")
 public class JwtTokenUtil implements Serializable{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class.getName());
 
-    @Value("")
+    @Value("${jwt.token.expiry}")
     private long JWT_TOKEN_VALIDITY;
-    @Value("")
+    @Value("${jwt.secret}")
     private String secret;
     private static volatile Key key;
 
