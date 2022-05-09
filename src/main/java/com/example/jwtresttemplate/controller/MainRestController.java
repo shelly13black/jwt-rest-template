@@ -4,6 +4,7 @@ import com.example.jwtresttemplate.jwt.config.JwtTokenUtil;
 import com.example.jwtresttemplate.jwt.model.ApiRefreshTokenRequest;
 import com.example.jwtresttemplate.jwt.model.ApiToken;
 import com.example.jwtresttemplate.jwt.model.ApiTokenRequest;
+import com.example.jwtresttemplate.service.MainService;
 import io.swagger.annotations.Api;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,9 @@ public class MainRestController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private MainService mainService;
+
     @PostMapping("/jwt-rest-template/auth/get-token")
     public ResponseEntity<?> getToken(@RequestBody ApiTokenRequest tokenRequest){
         final String token = jwtTokenUtil.encodeJWTKey(tokenRequest);
@@ -37,6 +41,6 @@ public class MainRestController {
 
     @PostMapping("/jwt-rest-template/test")
     public ResponseEntity<String> test(){
-        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+        return new ResponseEntity<>(mainService.test(), HttpStatus.OK);
     }
 }
